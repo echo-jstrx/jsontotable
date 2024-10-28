@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table with Radio Buttons</title>
+</head>
+<body>
+    <form id="dataForm" method="POST" action="/submit">
+        <table id="dataTable" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Option 1</th>
+                    <th>Option 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be inserted here -->
+            </tbody>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Sample JSON data
+        const jsonData = [
+            { "id": 1, "name": "Item 1" },
+            { "id": 2, "name": "Item 2" },
+            { "id": 3, "name": "Item 3" }
+        ];
+
+        // Function to create table rows
+        function createTableRows(data) {
+            const tableBody = document.querySelector('#dataTable tbody');
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+
+                // Create cells for ID and Name
+                const idCell = document.createElement('td');
+                idCell.textContent = item.id;
+                row.appendChild(idCell);
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = item.name;
+                row.appendChild(nameCell);
+
+                // Create cells for radio buttons
+                const option1Cell = document.createElement('td');
+                const option1Radio = document.createElement('input');
+                option1Radio.type = 'radio';
+                option1Radio.name = `option${index}`;
+                option1Radio.value = 'option1';
+                option1Cell.appendChild(option1Radio);
+                row.appendChild(option1Cell);
+
+                const option2Cell = document.createElement('td');
+                const option2Radio = document.createElement('input');
+                option2Radio.type = 'radio';
+                option2Radio.name = `option${index}`;
+                option2Radio.value = 'option2';
+                option2Cell.appendChild(option2Radio);
+                row.appendChild(option2Cell);
+
+                // Append the row to the table body
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Call the function with the JSON data
+        createTableRows(jsonData);
+    </script>
+</body>
+</html>
